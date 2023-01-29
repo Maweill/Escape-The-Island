@@ -1,4 +1,5 @@
 using UnityEngine;
+using Zenject;
 
 namespace _Project.Scripts.PlayerLogic
 {
@@ -7,14 +8,15 @@ namespace _Project.Scripts.PlayerLogic
         private Vector3 _moveDirection;
         
         // Начало временных полей. К тому же PlayerInputService висит на игроке
-        private PlayerInputService _playerInputService;
+        [Inject]
+        private PlayerInputService _playerInputService = null!;
+
         private Rigidbody _rigidbody;
         private float _moveSpeed = 3;
         // Конец временных полей
 
         private void Start()
         {
-            _playerInputService = FindObjectOfType<PlayerInputService>();
             _rigidbody = GetComponent<Rigidbody>();
         }
 
@@ -36,8 +38,9 @@ namespace _Project.Scripts.PlayerLogic
 
         private void RotatePlayerInMoveDirection()
         {
-            if (_moveDirection != Vector3.zero)
+            if (_moveDirection != Vector3.zero) {
                 transform.forward = _moveDirection;
+            }
         }
     }
 }
