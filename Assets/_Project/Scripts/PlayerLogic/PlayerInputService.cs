@@ -9,8 +9,9 @@ namespace _Project.Scripts.PlayerLogic
 
         private void Update()
         {
-            if (Input.GetKeyDown("space"))
+            if (Input.GetKeyDown("space")) {
                 OnInteract?.Invoke();
+            }
         }
 
         public Vector3 MoveDirection
