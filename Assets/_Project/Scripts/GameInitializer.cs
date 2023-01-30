@@ -12,7 +12,7 @@ namespace _Project.Scripts
 		[Inject]
 		private LocationDescriptor _locationDescriptor = null!;
 		
-		private void Start()
+		private void Awake()
 		{
 			_gameFactory.CreatePlayer(_locationDescriptor.InitialPlayerPositionPoint);
 		}

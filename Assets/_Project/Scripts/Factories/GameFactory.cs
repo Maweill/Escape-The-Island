@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using _Project.Scripts.Descriptors;
 using _Project.Scripts.PlayerLogic;
 using JetBrains.Annotations;

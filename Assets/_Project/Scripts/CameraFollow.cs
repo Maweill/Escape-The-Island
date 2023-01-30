@@ -1,25 +1,24 @@
-using System.Collections;
-using System.Collections.Generic;
 using _Project.Scripts.Factories;
 using UnityEngine;
 using Zenject;
 
-public class CameraFollow : MonoBehaviour
+namespace _Project.Scripts
 {
-    [Inject]
-    private GameFactory _gameFactory = null!;
-    
-    GameObject player;
-
-    // Start is called before the first frame update
-    void Start()
+    public class CameraFollow : MonoBehaviour
     {
-        player = _gameFactory.Player;
-    }
+        [Inject]
+        private GameFactory _gameFactory = null!;
 
-    // Update is called once per frame
-    void LateUpdate()
-    {
-        transform.position = player.transform.position;
+        private GameObject _player = null!;
+
+        private void Start()
+        {
+            _player = _gameFactory.Player;
+        }
+
+        private void LateUpdate()
+        {
+            transform.position = _player.transform.position;
+        }
     }
 }

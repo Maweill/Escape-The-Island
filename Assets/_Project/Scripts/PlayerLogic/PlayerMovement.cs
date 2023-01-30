@@ -1,3 +1,4 @@
+using _Project.Scripts.Descriptors;
 using UnityEngine;
 using Zenject;
 
@@ -5,17 +6,16 @@ namespace _Project.Scripts.PlayerLogic
 {
     public class PlayerMovement : MonoBehaviour
     {
-        private Vector3 _moveDirection;
-        
-        // Начало временных полей. К тому же PlayerInputService висит на игроке
         [Inject]
         private PlayerInputService _playerInputService = null!;
+        [Inject]
+        private PlayerDescriptor _playerDescriptor = null!;
 
-        private Rigidbody _rigidbody;
-        private float _moveSpeed = 3;
-        // Конец временных полей
+        private Rigidbody _rigidbody = null!;
+        
+        private Vector3 _moveDirection;
 
-        private void Start()
+        private void Awake()
         {
             _rigidbody = GetComponent<Rigidbody>();
         }
@@ -29,18 +29,18 @@ namespace _Project.Scripts.PlayerLogic
         private void Move()
         {
             _moveDirection = _playerInputService.MoveDirection;
-            if (_moveDirection.magnitude > 1)
-            {
+            if (_moveDirection.magnitude > 1) {
                 _moveDirection.Normalize();
             }
-            _rigidbody.MovePosition(transform.position + _moveDirection * _moveSpeed * Time.deltaTime);
+            _rigidbody.MovePosition(transform.position + _moveDirection * _playerDescriptor.MoveSpeed * Time.deltaTime);
         }
 
         private void RotatePlayerInMoveDirection()
         {
-            if (_moveDirection != Vector3.zero) {
-                transform.forward = _moveDirection;
+            if (_moveDirection == Vector3.zero) {
+                return;
             }
+            transform.forward = _moveDirection;
         }
     }
 }
