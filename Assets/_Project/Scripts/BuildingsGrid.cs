@@ -1,17 +1,18 @@
 ﻿using UnityEngine;
+using UnityEngine.Serialization;
 
 public class BuildingsGrid : MonoBehaviour
 {
     [SerializeField]
-    private Vector2Int gridSize = new Vector2Int(10, 10);
+    private Vector2Int _gridSize = new Vector2Int(10, 10);
 
-    private Building[,] _grid;
-    private Building _flyingBuilding;
-    private Camera _mainCamera;
+    private Building[,] _grid = null!;
+    private Building? _flyingBuilding;
+    private Camera _mainCamera = null!;
     
     private void Awake()
     {
-        _grid = new Building[gridSize.x, gridSize.y];
+        _grid = new Building[_gridSize.x, _gridSize.y];
         _mainCamera = Camera.main;
     }
 
@@ -43,18 +44,31 @@ public class BuildingsGrid : MonoBehaviour
         PlaceFlyingBuilding(x, y);
     }
 
-    private static void GetPlacementCoordinates(Ray ray, float position, out int x, out int y)
+    private void GetPlacementCoordinates(Ray ray, float position, out int x, out int y)
     {
         Vector3 worldPosition = ray.GetPoint(position);
         x = Mathf.RoundToInt(worldPosition.x);
         y = Mathf.RoundToInt(worldPosition.z);
     }
-
-
+    
+    private void PlaceFlyingBuilding(int placeX, int placeY)
+    {
+        for (int x = 0; x < _flyingBuilding.Size.x; x++)
+        {
+            for (int y = 0; y < _flyingBuilding.Size.y; y++)
+            {
+                _grid[placeX + x, placeY + y] = _flyingBuilding;
+            }
+        }
+        
+        _flyingBuilding.SetNormal();
+        _flyingBuilding = null;
+    }
+    
     private bool IsBuildingOutOfGrid(int placeX, int placeY)
     {
-        if (placeX < 0 || placeX > gridSize.x - _flyingBuilding.Size.x) return true;
-        return placeY < 0 || placeY > gridSize.y - _flyingBuilding.Size.y;
+        if (placeX < 0 || placeX > _gridSize.x - _flyingBuilding.Size.x) return true;
+        return placeY < 0 || placeY > _gridSize.y - _flyingBuilding.Size.y;
     }
     
     private bool IsPlaceTaken(int placeX, int placeY)
@@ -68,19 +82,5 @@ public class BuildingsGrid : MonoBehaviour
         }
 
         return false;
-    }
-
-    private void PlaceFlyingBuilding(int placeX, int placeY)
-    {
-        for (int x = 0; x < _flyingBuilding.Size.x; x++)
-        {
-            for (int y = 0; y < _flyingBuilding.Size.y; y++)
-            {
-                _grid[placeX + x, placeY + y] = _flyingBuilding;
-            }
-        }
-        
-        _flyingBuilding.SetNormal();
-        _flyingBuilding = null;
     }
 }
