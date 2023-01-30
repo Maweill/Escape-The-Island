@@ -19,20 +19,21 @@ public class BuildingsGrid : MonoBehaviour
     public void StartPlacingBuilding(Building buildingPrefab)
     {
         if (_flyingBuilding != null)
-        {
             Destroy(_flyingBuilding.gameObject);
-        }
+        
         _flyingBuilding = Instantiate(buildingPrefab);
     }
 
     private void Update()
     {
-        if (_flyingBuilding == null) return;
+        if (_flyingBuilding == null) 
+            return;
         
         var groundPlane = new Plane(Vector3.up, Vector3.zero);
         Ray ray = _mainCamera.ScreenPointToRay(Input.mousePosition);
 
-        if (!groundPlane.Raycast(ray, out float position)) return;
+        if (!groundPlane.Raycast(ray, out float position))
+            return;
         
         GetPlacementCoordinates(ray, position, out int x, out int y);
         bool isPlaceAvailable = !(IsBuildingOutOfGrid(x, y) || IsPlaceTaken(x, y));
@@ -40,7 +41,8 @@ public class BuildingsGrid : MonoBehaviour
         _flyingBuilding.transform.position = new Vector3(x, 0, y);
         _flyingBuilding.SetTransparent(isPlaceAvailable);
 
-        if (!isPlaceAvailable || !Input.GetMouseButtonDown(0)) return;
+        if (!isPlaceAvailable || !Input.GetMouseButtonDown(0)) 
+            return;
         PlaceFlyingBuilding(x, y);
     }
 
@@ -60,14 +62,14 @@ public class BuildingsGrid : MonoBehaviour
                 _grid[placeX + x, placeY + y] = _flyingBuilding;
             }
         }
-        
         _flyingBuilding.SetNormal();
         _flyingBuilding = null;
     }
     
     private bool IsBuildingOutOfGrid(int placeX, int placeY)
     {
-        if (placeX < 0 || placeX > _gridSize.x - _flyingBuilding.Size.x) return true;
+        if (placeX < 0 || placeX > _gridSize.x - _flyingBuilding.Size.x) 
+            return true;
         return placeY < 0 || placeY > _gridSize.y - _flyingBuilding.Size.y;
     }
     
@@ -77,10 +79,10 @@ public class BuildingsGrid : MonoBehaviour
         {
             for (int y = 0; y < _flyingBuilding.Size.y; y++)
             {
-                if (_grid[placeX + x, placeY + y] != null) return true;
+                if (_grid[placeX + x, placeY + y] != null)
+                    return true;
             }
         }
-
         return false;
     }
 }

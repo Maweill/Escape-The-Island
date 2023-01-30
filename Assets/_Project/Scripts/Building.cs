@@ -13,7 +13,7 @@ public class Building : MonoBehaviour
 
     public void SetTransparent(bool available)
     {
-        _mainRenderer.material.color = available ? Color.green : Color.red;
+       MeshColor = available ? Color.green : Color.red;
     }
 
     public void SetNormal()
@@ -33,6 +33,14 @@ public class Building : MonoBehaviour
         }
     }
     
-    public Vector2Int Size => _size;
-}
+    public Vector2Int Size
+    {
+        get { return _size; }
+    }
+
+    private Color MeshColor
+    {
+        set { _mainRenderer.material.color = value; }
+    }
+}   
 
