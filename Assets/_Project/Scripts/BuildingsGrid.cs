@@ -3,7 +3,7 @@
 public class BuildingsGrid : MonoBehaviour
 {
     [SerializeField]
-    public Vector2Int gridSize = new Vector2Int(10, 10);
+    private Vector2Int gridSize = new Vector2Int(10, 10);
 
     private Building[,] _grid;
     private Building _flyingBuilding;
@@ -53,15 +53,15 @@ public class BuildingsGrid : MonoBehaviour
 
     private bool IsBuildingOutOfGrid(int placeX, int placeY)
     {
-        if (placeX < 0 || placeX > gridSize.x - _flyingBuilding.size.x) return true;
-        return placeY < 0 || placeY > gridSize.y - _flyingBuilding.size.y;
+        if (placeX < 0 || placeX > gridSize.x - _flyingBuilding.Size.x) return true;
+        return placeY < 0 || placeY > gridSize.y - _flyingBuilding.Size.y;
     }
     
     private bool IsPlaceTaken(int placeX, int placeY)
     {
-        for (int x = 0; x < _flyingBuilding.size.x; x++)
+        for (int x = 0; x < _flyingBuilding.Size.x; x++)
         {
-            for (int y = 0; y < _flyingBuilding.size.y; y++)
+            for (int y = 0; y < _flyingBuilding.Size.y; y++)
             {
                 if (_grid[placeX + x, placeY + y] != null) return true;
             }
@@ -72,9 +72,9 @@ public class BuildingsGrid : MonoBehaviour
 
     private void PlaceFlyingBuilding(int placeX, int placeY)
     {
-        for (int x = 0; x < _flyingBuilding.size.x; x++)
+        for (int x = 0; x < _flyingBuilding.Size.x; x++)
         {
-            for (int y = 0; y < _flyingBuilding.size.y; y++)
+            for (int y = 0; y < _flyingBuilding.Size.y; y++)
             {
                 _grid[placeX + x, placeY + y] = _flyingBuilding;
             }

@@ -3,11 +3,8 @@
   <component name="ChangeListManager">
     <list default="true" id="afee56c6-5396-4401-b63c-a9150eef5880" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Escape-The-Island/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Escape-The-Island/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Buildings/House.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Buildings/House.prefab" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/Building.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Building.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/BuildingsGrid.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/BuildingsGrid.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/UserSettings/EditorUserSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/UserSettings/EditorUserSettings.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/UserSettings/Layouts/default-2021.dwlt" beforeDir="false" afterPath="$PROJECT_DIR$/UserSettings/Layouts/default-2021.dwlt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -93,7 +90,7 @@
       <option name="presentableId" value="Default" />
       <updated>1674975962368</updated>
       <workItem from="1674975967867" duration="4807000" />
-      <workItem from="1675062348423" duration="7156000" />
+      <workItem from="1675062348423" duration="11963000" />
     </task>
     <servers />
   </component>
