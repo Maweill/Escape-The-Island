@@ -11,11 +11,14 @@ namespace _Project.Scripts.Installers
 		private PlayerDescriptor _playerDescriptor = null!;
 		[SerializeField]
 		private LocationDescriptor _locationDescriptor = null!;
+		[SerializeField] 
+		private ResourceDescriptorCollection _resourceDescriptorCollection = null!;
 		
 		public override void InstallBindings()
 		{
 			Container.BindInstance(_playerDescriptor).AsSingle();
 			Container.BindInstance(_locationDescriptor).AsSingle();
+			Container.BindInstance(_resourceDescriptorCollection).AsSingle();
 		}
 	}
 }

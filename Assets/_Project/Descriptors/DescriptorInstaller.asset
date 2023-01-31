@@ -14,3 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _playerDescriptor: {fileID: 11400000, guid: 433d9d0fb750bb34ca9f3a506dc30d97, type: 2}
   _locationDescriptor: {fileID: 11400000, guid: 77204ea96d0234c4983495cf2a17359a, type: 2}
+  _resourceDescriptorCollection: {fileID: 11400000, guid: e12d260dff1decc44bc12ed12d24bc10, type: 2}

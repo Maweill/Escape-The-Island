@@ -9,9 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 01f217e998664c71a314ba513c64d1e0, type: 3}
-  m_Name: PlayerDescriptor
+  m_Script: {fileID: 11500000, guid: 9541877fb4fd5d442bf3532925cb77d9, type: 3}
+  m_Name: RockDescriptor
   m_EditorClassIdentifier: 
-  Prefab: {fileID: 5047928315710114831, guid: bd4173993958f14479601119aa1e708e, type: 3}
-  MoveSpeed: 3
-  BaseDamageToResources: 20
+  ResourceItemPrefab: {fileID: 7592115681461521336, guid: db374ac1420be6343b6273fdb7a04331, type: 3}
+  ResourceHp: 300
