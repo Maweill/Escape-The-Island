@@ -1,6 +1,6 @@
 namespace _Project.Scripts.EnvironmentResources
 {
-    public enum ResourceTypes
+    public enum ResourceType
     {
         Tree,
         Rock

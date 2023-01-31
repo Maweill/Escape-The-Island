@@ -12,5 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 68face56c1dc6c4478d56d3ad18a881e, type: 3}
   m_Name: ResourceDescriptorCollection
   m_EditorClassIdentifier: 
-  TreeDescriptor: {fileID: 11400000, guid: a38582c54400f4e499a9a7b2ed3a28d6, type: 2}
-  RockDescriptor: {fileID: 11400000, guid: 2661196c12240bd4c930e4abe79f6aaa, type: 2}
+  Descriptors:
+  - {fileID: 11400000, guid: 2661196c12240bd4c930e4abe79f6aaa, type: 2}
+  - {fileID: 11400000, guid: a38582c54400f4e499a9a7b2ed3a28d6, type: 2}

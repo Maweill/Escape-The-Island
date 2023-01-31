@@ -3,7 +3,6 @@ using _Project.Scripts.EnvironmentResources;
 using _Project.Scripts.Factories;
 using UnityEngine;
 using Zenject;
-using System.Linq;
 
 namespace _Project.Scripts
 {
@@ -18,18 +17,17 @@ namespace _Project.Scripts
 		
 		private void Awake()
 		{
-			CreatePlayer();
-			InitResources();
-		}
-
-		private void CreatePlayer()
-		{
 			_gameFactory.CreatePlayer(_locationDescriptor.InitialPlayerPositionPoint);
+			InitResources();
 		}
 
 		private void InitResources()
 		{
-			FindObjectsOfType<Resource>().ToList().ForEach(resource => resource.Init(_resourceDescriptorCollection));
+			foreach (Resource resource in FindObjectsOfType<Resource>())
+			{
+				ResourceDescriptor descriptor = _resourceDescriptorCollection.GetDescriptorByResourceType(resource.Type);
+				resource.Init(descriptor.Hp, descriptor.ItemPrefab);
+			}
 		}
 	}
 }

@@ -1,4 +1,5 @@
-using System;
+using System.Collections.Generic;
+using System.Linq;
 using _Project.Scripts.EnvironmentResources;
 using UnityEngine;
 
@@ -7,21 +8,12 @@ namespace _Project.Scripts.Descriptors
     [CreateAssetMenu(fileName = "ResourceDescriptorCollection", menuName = "Descriptors/ResourceCollection", order = 0)]
     public class ResourceDescriptorCollection : ScriptableObject
     {
-        public ResourceDescriptor TreeDescriptor;
-        public ResourceDescriptor RockDescriptor;
+        public List<ResourceDescriptor> Descriptors = null!;
 
 
-        public ResourceDescriptor GetDescriptorByResourceType(ResourceTypes resourceType)
+        public ResourceDescriptor GetDescriptorByResourceType(ResourceType resourceType)
         {
-            switch (resourceType)
-            {
-                case ResourceTypes.Tree:
-                    return TreeDescriptor;
-                case ResourceTypes.Rock:
-                    return RockDescriptor;
-            }
-
-            throw new ArgumentException(message: "Некорректный тип ресурса");
+            return Descriptors.First(descriptor => descriptor.ResourceType == resourceType);
         }
     }
 }

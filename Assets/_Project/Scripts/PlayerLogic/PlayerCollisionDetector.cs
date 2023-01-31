@@ -18,7 +18,7 @@ namespace _Project.Scripts.PlayerLogic
         {
             if (other.TryGetComponent(out Resource resource))
             {
-                _resourceMiner.SetResourceForMining(resource);
+                _resourceMiner.CurrentResourceForMining = resource;
             }
         }
 
@@ -26,7 +26,7 @@ namespace _Project.Scripts.PlayerLogic
         {
             if (other.TryGetComponent(out Resource resource))
             {
-                _resourceMiner.ClearResourceForMining();
+                _resourceMiner.CurrentResourceForMining = null;
             }
         }
     }

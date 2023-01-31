@@ -1,4 +1,3 @@
-using _Project.Scripts.Descriptors;
 using UnityEngine;
 
 namespace _Project.Scripts.EnvironmentResources
@@ -7,26 +6,27 @@ namespace _Project.Scripts.EnvironmentResources
     public class Resource : MonoBehaviour
     {
         [SerializeField] 
-        private ResourceTypes _resourceType;
-
+        private ResourceType _type;
+        
         private Collider _collider;
-
         private float _currentHp;
-        private GameObject _resourceItemPrefab;
+        private GameObject _resourceItemPrefab = null!;
 
 
-        public void Init(ResourceDescriptorCollection resourceDescriptorCollection)
+        public ResourceType Type { get { return _type; }}
+        
+        
+        public void Init(float baseHp, GameObject itemPrefab)
         {
-            ResourceDescriptor resourceDescriptor = resourceDescriptorCollection.GetDescriptorByResourceType(_resourceType);
-            _currentHp = resourceDescriptor.ResourceHp;
-            _resourceItemPrefab = resourceDescriptor.ResourceItemPrefab;
+            _currentHp = baseHp;
+            _resourceItemPrefab = itemPrefab;
         }
         
         public bool TryToDestroy(float damage)
         {
             _currentHp -= damage;
-            Debug.Log(gameObject.name + " current hp: " + _currentHp);
-            
+            Debug.Log($"Trying to destory object. name={gameObject.name}, currentHp={_currentHp}");
+
             if (_currentHp <= 0)
             {
                 Die();
@@ -45,7 +45,7 @@ namespace _Project.Scripts.EnvironmentResources
         {
             SpawnResourceItem();
             _collider.enabled = false;
-            Destroy(gameObject, 0.5f);
+            Destroy(gameObject);
         }
 
         private void SpawnResourceItem()
