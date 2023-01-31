@@ -25,7 +25,7 @@ namespace _Project.Scripts
 		{
 			foreach (Resource resource in FindObjectsOfType<Resource>())
 			{
-				ResourceDescriptor descriptor = _resourceDescriptorCollection.GetDescriptorByResourceType(resource.Type);
+				ResourceDescriptor descriptor = _resourceDescriptorCollection.GetDescriptor(resource.Type);
 				resource.Init(descriptor.Hp, descriptor.ItemPrefab);
 			}
 		}

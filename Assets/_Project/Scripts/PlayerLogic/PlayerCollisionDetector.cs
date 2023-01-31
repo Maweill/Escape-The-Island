@@ -8,7 +8,6 @@ namespace _Project.Scripts.PlayerLogic
     {
         private ResourceMiner _resourceMiner = null!;
 
-
         private void Awake()
         {
             _resourceMiner = GetComponent<ResourceMiner>();
@@ -16,16 +15,14 @@ namespace _Project.Scripts.PlayerLogic
 
         private void OnTriggerStay(Collider other)
         {
-            if (other.TryGetComponent(out Resource resource))
-            {
+            if (other.TryGetComponent(out Resource resource)) {
                 _resourceMiner.CurrentResourceForMining = resource;
             }
         }
 
         private void OnTriggerExit(Collider other)
         {
-            if (other.TryGetComponent(out Resource resource))
-            {
+            if (other.TryGetComponent(out Resource resource)) {
                 _resourceMiner.CurrentResourceForMining = null;
             }
         }

@@ -12,10 +12,8 @@ namespace _Project.Scripts.EnvironmentResources
         private float _currentHp;
         private GameObject _resourceItemPrefab = null!;
 
-
         public ResourceType Type { get { return _type; }}
-        
-        
+
         public void Init(float baseHp, GameObject itemPrefab)
         {
             _currentHp = baseHp;
@@ -27,8 +25,7 @@ namespace _Project.Scripts.EnvironmentResources
             _currentHp -= damage;
             Debug.Log($"Trying to destory object. name={gameObject.name}, currentHp={_currentHp}");
 
-            if (_currentHp <= 0)
-            {
+            if (_currentHp <= 0) {
                 Die();
                 return true;
             }

@@ -11,7 +11,7 @@ namespace _Project.Scripts.Descriptors
         public List<ResourceDescriptor> Descriptors = null!;
 
 
-        public ResourceDescriptor GetDescriptorByResourceType(ResourceType resourceType)
+        public ResourceDescriptor GetDescriptor(ResourceType resourceType)
         {
             return Descriptors.First(descriptor => descriptor.ResourceType == resourceType);
         }

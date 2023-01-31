@@ -14,10 +14,8 @@ namespace _Project.Scripts.PlayerLogic
         
         private bool _isMining;
 
-
         public Resource? CurrentResourceForMining { get; set; }
-        
-        
+
         private void OnEnable()
         {
             _playerInputService.OnInteract += TryStartMining;
@@ -30,8 +28,7 @@ namespace _Project.Scripts.PlayerLogic
 
         private void TryStartMining()
         {
-            if (_isMining || CurrentResourceForMining == null)
-            {
+            if (_isMining || CurrentResourceForMining == null) {
                 return;
             }
 
@@ -43,8 +40,7 @@ namespace _Project.Scripts.PlayerLogic
             _isMining = true;
             // TODO Анимация
             Debug.Log("Mining hit");
-            if (CurrentResourceForMining.TryToDestroy(_playerDescriptor.BaseDamageToResources))
-            {
+            if (CurrentResourceForMining.TryToDestroy(_playerDescriptor.BaseDamageToResources)) {
                 CurrentResourceForMining = null;
             }
             _isMining = false;
