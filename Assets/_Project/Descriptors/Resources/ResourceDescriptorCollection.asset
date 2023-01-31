@@ -9,9 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 01f217e998664c71a314ba513c64d1e0, type: 3}
-  m_Name: PlayerDescriptor
+  m_Script: {fileID: 11500000, guid: 68face56c1dc6c4478d56d3ad18a881e, type: 3}
+  m_Name: ResourceDescriptorCollection
   m_EditorClassIdentifier: 
-  Prefab: {fileID: 5047928315710114831, guid: bd4173993958f14479601119aa1e708e, type: 3}
-  MoveSpeed: 3
-  BaseDamageToResources: 20
+  Descriptors:
+  - {fileID: 11400000, guid: 2661196c12240bd4c930e4abe79f6aaa, type: 2}
+  - {fileID: 11400000, guid: a38582c54400f4e499a9a7b2ed3a28d6, type: 2}
