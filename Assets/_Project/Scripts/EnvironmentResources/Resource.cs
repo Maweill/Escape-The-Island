@@ -1,3 +1,4 @@
+using DG.Tweening;
 using UnityEngine;
 
 namespace _Project.Scripts.EnvironmentResources
@@ -24,6 +25,7 @@ namespace _Project.Scripts.EnvironmentResources
         {
             _currentHp -= damage;
             Debug.Log($"Trying to destory object. name={gameObject.name}, currentHp={_currentHp}");
+            PlayGetDamageAnim();
 
             if (_currentHp <= 0) {
                 Die();
@@ -48,6 +50,13 @@ namespace _Project.Scripts.EnvironmentResources
         private void SpawnResourceItem()
         {
             Instantiate(_resourceItemPrefab, transform.position, Quaternion.identity);
+        }
+
+        private void PlayGetDamageAnim()
+        {
+            Vector3 newScale = transform.localScale;
+            newScale -= new Vector3(0.05f, 0f, 0.05f);
+            transform.DOScale(newScale, 0.3f);
         }
     }
 }
