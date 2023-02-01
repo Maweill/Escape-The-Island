@@ -8,7 +8,8 @@ namespace _Project.Scripts.EnvironmentResources
     {
         [SerializeField] 
         private ResourceType _type;
-        
+
+        private const float ITEM_DROP_RADIUS = 1.5f;
         private Collider _collider;
         private float _currentHp;
         private GameObject _resourceItemPrefab = null!;
@@ -49,7 +50,9 @@ namespace _Project.Scripts.EnvironmentResources
 
         private void SpawnResourceItem()
         {
-            Instantiate(_resourceItemPrefab, transform.position, Quaternion.identity);
+            Vector3 randomPointInSphere = Random.insideUnitCircle * ITEM_DROP_RADIUS;
+            Vector3 spawnPoint = transform.position + new Vector3(randomPointInSphere.x, 0, randomPointInSphere.z);
+            Instantiate(_resourceItemPrefab, spawnPoint, Quaternion.identity);
         }
 
         private void PlayGetDamageAnim()
