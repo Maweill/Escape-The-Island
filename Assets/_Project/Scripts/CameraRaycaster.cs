@@ -49,9 +49,7 @@ public class CameraRaycaster : MonoBehaviour
                 {
                     layerHit = layer;
                     onLayerChange(layer);
-
                 }
-                layerHit = layer;
                 return;
             }
         }

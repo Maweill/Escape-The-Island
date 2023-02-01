@@ -18,7 +18,7 @@ public class Building : MonoBehaviour
 
     public void SetNormal()
     {
-        _mainRenderer.material.color = Color.white;
+        MeshColor = Color.white;
     }
 
     private void OnDrawGizmos()
@@ -28,7 +28,7 @@ public class Building : MonoBehaviour
             for (int y = 0; y < Size.y; y++)
             {
                 Gizmos.color = (x + y) % 2 == 0 ? PurpleColor : BrownColor;
-                Gizmos.DrawCube(transform.position + new Vector3(x, 0, y), new Vector3(1, .1f, 1));
+                Gizmos.DrawCube(transform.position + new Vector3(x + 0.5f, 0, y + 0.5f), new Vector3(1, .1f, 1));
             }
         }
     }

@@ -1,56 +1,61 @@
 ﻿using UnityEngine;
-using UnityEngine.Serialization;
 
 public class BuildingsGrid : MonoBehaviour
 {
     [SerializeField]
     private Vector2Int _gridSize = new Vector2Int(10, 10);
-
+    
     private Building[,] _grid = null!;
     private Building? _flyingBuilding;
     private Camera _mainCamera = null!;
+    private GameObject _originPoint = null!;
+    private Plane _groundPlane;
     
     private void Awake()
     {
         _grid = new Building[_gridSize.x, _gridSize.y];
         _mainCamera = Camera.main;
+        _originPoint = GameObject.Find("OriginPoint");
+        transform.localScale = new Vector3(0.1f * _gridSize.x, 1, 0.1f * _gridSize.y);
     }
 
     public void StartPlacingBuilding(Building buildingPrefab)
     {
-        if (_flyingBuilding != null)
+        if (_flyingBuilding != null) {
             Destroy(_flyingBuilding.gameObject);
-        
+        }
         _flyingBuilding = Instantiate(buildingPrefab);
     }
 
     private void Update()
     {
-        if (_flyingBuilding == null) 
+        if (_flyingBuilding == null) {
             return;
-        
-        var groundPlane = new Plane(Vector3.up, Vector3.zero);
+        }
         Ray ray = _mainCamera.ScreenPointToRay(Input.mousePosition);
 
-        if (!groundPlane.Raycast(ray, out float position))
+        if (!(Physics.Raycast(ray, out RaycastHit hit) && hit.transform.gameObject.layer == 10)){
             return;
+        }
+        GetPlacementWorldCoordinates(ray, hit.point, out int globalX, out int globalY);
         
-        GetPlacementCoordinates(ray, position, out int x, out int y);
-        bool isPlaceAvailable = !(IsBuildingOutOfGrid(x, y) || IsPlaceTaken(x, y));
+        int localX = globalX - (int)_originPoint.transform.position.x;
+        int localY = globalY - (int)_originPoint.transform.position.z;
+        bool isPlaceAvailable = !(IsBuildingOutOfGrid(localX, localY) || IsPlaceTaken(localX, localY));
         
-        _flyingBuilding.transform.position = new Vector3(x, 0, y);
+        _flyingBuilding.transform.position = new Vector3(globalX, 0, globalY);
         _flyingBuilding.SetTransparent(isPlaceAvailable);
-
-        if (!isPlaceAvailable || !Input.GetMouseButtonDown(0)) 
+        
+        if (!isPlaceAvailable || !Input.GetMouseButtonDown(0)){
             return;
-        PlaceFlyingBuilding(x, y);
+        }
+        PlaceFlyingBuilding(localX, localY);
     }
 
-    private void GetPlacementCoordinates(Ray ray, float position, out int x, out int y)
+    private static void GetPlacementWorldCoordinates(Ray ray, Vector3 position, out int x, out int y)
     {
-        Vector3 worldPosition = ray.GetPoint(position);
-        x = Mathf.RoundToInt(worldPosition.x);
-        y = Mathf.RoundToInt(worldPosition.z);
+        x = (int)Mathf.Floor(position.x) ;
+        y = (int)Mathf.Floor(position.z);
     }
     
     private void PlaceFlyingBuilding(int placeX, int placeY)
@@ -68,8 +73,9 @@ public class BuildingsGrid : MonoBehaviour
     
     private bool IsBuildingOutOfGrid(int placeX, int placeY)
     {
-        if (placeX < 0 || placeX > _gridSize.x - _flyingBuilding.Size.x) 
+        if (placeX < 0 || placeX > _gridSize.x - _flyingBuilding.Size.x) {
             return true;
+        }
         return placeY < 0 || placeY > _gridSize.y - _flyingBuilding.Size.y;
     }
     
@@ -79,8 +85,9 @@ public class BuildingsGrid : MonoBehaviour
         {
             for (int y = 0; y < _flyingBuilding.Size.y; y++)
             {
-                if (_grid[placeX + x, placeY + y] != null)
+                if (_grid[placeX + x, placeY + y] != null) {
                     return true;
+                }
             }
         }
         return false;
