@@ -6,11 +6,16 @@ namespace _Project.Scripts.PlayerLogic
     public class PlayerInputService : MonoBehaviour
     {
         public event Action? OnInteract;
-
+        public event Action? onLeftButtonDown;
+        
         private void Update()
         {
             if (Input.GetKeyDown("space")) {
                 OnInteract?.Invoke();
+            }
+
+            if (Input.GetMouseButtonDown(0)) {
+                onLeftButtonDown?.Invoke();
             }
         }
 

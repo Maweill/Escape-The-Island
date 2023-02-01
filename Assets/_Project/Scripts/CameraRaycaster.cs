@@ -7,24 +7,13 @@ public class CameraRaycaster : MonoBehaviour
         Layer.Walkable
     };
 
-    [SerializeField] float distanceToBackground = 100f;
-    Camera viewCamera;
-
-    RaycastHit raycastHit;
-    public RaycastHit hit
-    {
-        get { return raycastHit; }
-    }
-
-    Layer layerHit;
-    public Layer currentLayerHit
-    {
-        get { return layerHit; }
-    }
+    [SerializeField] private float distanceToBackground = 100f;
+    Camera _viewCamera;
+    RaycastHit _raycastHit;
+    Layer _layerHit;
 
     public delegate void OnLayerChange(Layer newLayer); // declare new delegate type
     public event OnLayerChange onLayerChange; // instantiate an observer set
-    
     
     void SomeLayerChangeHandler()
     {
@@ -33,7 +22,7 @@ public class CameraRaycaster : MonoBehaviour
     
     void Start() // TODO Awake?
     {
-        viewCamera = Camera.main;
+        _viewCamera = Camera.main;
     }
 
     void Update()
@@ -44,10 +33,10 @@ public class CameraRaycaster : MonoBehaviour
             var hit = RaycastForLayer(layer);
             if (hit.HasValue)
             {
-                raycastHit = hit.Value;
-                if (layerHit != layer)
+                _raycastHit = hit.Value;
+                if (_layerHit != layer)
                 {
-                    layerHit = layer;
+                    _layerHit = layer;
                     onLayerChange(layer);
                 }
                 return;
@@ -55,14 +44,14 @@ public class CameraRaycaster : MonoBehaviour
         }
 
         // Otherwise return background hit
-        raycastHit.distance = distanceToBackground;
-        layerHit = Layer.RaycastEndStop;
+        _raycastHit.distance = distanceToBackground;
+        _layerHit = Layer.RaycastEndStop;
     }
 
     RaycastHit? RaycastForLayer(Layer layer)
     {
         int layerMask = 1 << (int)layer; // See Unity docs for mask formation
-        Ray ray = viewCamera.ScreenPointToRay(Input.mousePosition);
+        Ray ray = _viewCamera.ScreenPointToRay(Input.mousePosition);
 
         RaycastHit hit; // used as an out parameter
         bool hasHit = Physics.Raycast(ray, out hit, distanceToBackground, layerMask);
@@ -71,5 +60,15 @@ public class CameraRaycaster : MonoBehaviour
             return hit;
         }
         return null;
+    }
+    
+    public RaycastHit hit
+    {
+        get { return _raycastHit; }
+    }
+
+    public Layer currentLayerHit
+    {
+        get { return _layerHit; }
     }
 }

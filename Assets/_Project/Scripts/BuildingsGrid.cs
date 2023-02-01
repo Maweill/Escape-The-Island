@@ -4,18 +4,18 @@ public class BuildingsGrid : MonoBehaviour
 {
     [SerializeField]
     private Vector2Int _gridSize = new Vector2Int(10, 10);
+    [SerializeField]
+    private GameObject _originPoint = null!;
     
     private Building[,] _grid = null!;
     private Building? _flyingBuilding;
     private Camera _mainCamera = null!;
-    private GameObject _originPoint = null!;
     private Plane _groundPlane;
     
     private void Awake()
     {
         _grid = new Building[_gridSize.x, _gridSize.y];
         _mainCamera = Camera.main;
-        _originPoint = GameObject.Find("OriginPoint");
         transform.localScale = new Vector3(0.1f * _gridSize.x, 1, 0.1f * _gridSize.y);
     }
 
@@ -52,7 +52,7 @@ public class BuildingsGrid : MonoBehaviour
         PlaceFlyingBuilding(localX, localY);
     }
 
-    private static void GetPlacementWorldCoordinates(Ray ray, Vector3 position, out int x, out int y)
+    private void GetPlacementWorldCoordinates(Ray ray, Vector3 position, out int x, out int y)
     {
         x = (int)Mathf.Floor(position.x) ;
         y = (int)Mathf.Floor(position.z);
