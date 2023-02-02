@@ -3,17 +3,16 @@ using System.Linq;
 using _Project.Scripts.EnvironmentResources;
 using UnityEngine;
 
-namespace _Project.Scripts.Descriptors
+namespace _Project.Scripts.Descriptors.Resources
 {
     [CreateAssetMenu(fileName = "ResourceDescriptorCollection", menuName = "Descriptors/ResourceCollection", order = 0)]
     public class ResourceDescriptorCollection : ScriptableObject
     {
         public List<ResourceDescriptor> Descriptors = null!;
 
-
-        public ResourceDescriptor GetDescriptor(ResourceType resourceType)
+        public ResourceDescriptor GetDescriptor(ResourceType type)
         {
-            return Descriptors.First(descriptor => descriptor.ResourceType == resourceType);
+            return Descriptors.First(descriptor => descriptor.ResourceType == type);
         }
     }
 }

@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 7231248861589052691}
   - component: {fileID: 7231248861589052688}
   m_Layer: 0
-  m_Name: AnimalGFX
+  m_Name: LionGFX
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -96,7 +96,7 @@ GameObject:
   - component: {fileID: 7231248861672794193}
   - component: {fileID: 7231248861672794198}
   m_Layer: 0
-  m_Name: Animal
+  m_Name: Lion
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
