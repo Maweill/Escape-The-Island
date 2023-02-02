@@ -34,11 +34,6 @@ namespace _Project.Scripts.AI
             Gizmos.DrawWireSphere(transform.position, _walkRadius);
         }
 
-        private void Awake()
-        {
-            SetPositionsForAnimals();
-        }
-
         private void SpawnAnimals(int animalsNumber)
         {
             for (int i = 0; i < animalsNumber; i++)
