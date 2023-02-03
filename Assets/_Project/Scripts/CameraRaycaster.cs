@@ -1,74 +1,75 @@
-﻿ using UnityEngine;
+﻿using System;
+using UnityEngine;
 
-public class CameraRaycaster : MonoBehaviour
+namespace _Project.Scripts
 {
-    public Layer[] layerPriorities = {
-        Layer.Enemy,
-        Layer.Walkable
-    };
-
-    [SerializeField] private float distanceToBackground = 100f;
-    Camera _viewCamera;
-    RaycastHit _raycastHit;
-    Layer _layerHit;
-
-    public delegate void OnLayerChange(Layer newLayer); // declare new delegate type
-    public event OnLayerChange onLayerChange; // instantiate an observer set
-    
-    void SomeLayerChangeHandler()
+    public class CameraRaycaster : MonoBehaviour
     {
-        print("I handle it!");
-    }
-    
-    void Start() // TODO Awake?
-    {
-        _viewCamera = Camera.main;
-    }
-
-    void Update()
-    {
-        // Look for and return priority layer hit
-        foreach (Layer layer in layerPriorities)
+        [SerializeField] 
+        private float distanceToBackground = 100f;
+        
+        public event Action<Layer> OnLayerChange = null!;
+        private Camera _viewCamera = null!;
+        private RaycastHit _raycastHit;
+        private Layer _layerHit;
+        
+        private readonly Layer[] _layerPriorities = 
         {
-            var hit = RaycastForLayer(layer);
-            if (hit.HasValue)
+            Layer.Enemy,
+            Layer.Walkable
+        };
+        
+        private void Start() 
+        {
+            _viewCamera = Camera.main;
+        }
+
+        private void Update()
+        {
+            // Look for and return priority layer hit
+            foreach (Layer layer in _layerPriorities)
             {
-                _raycastHit = hit.Value;
-                if (_layerHit != layer)
+                RaycastHit? hit = RaycastForLayer(layer);
+                if (!hit.HasValue)
                 {
-                    _layerHit = layer;
-                    onLayerChange(layer);
+                    continue;
                 }
+                _raycastHit = hit.Value;
+            
+                if (_layerHit == layer)
+                {
+                    return;
+                }
+                _layerHit = layer;
+                OnLayerChange?.Invoke(layer);
                 return;
             }
+            // Otherwise return background hit
+            _raycastHit.distance = distanceToBackground;
+            _layerHit = Layer.RaycastEndStop;
         }
 
-        // Otherwise return background hit
-        _raycastHit.distance = distanceToBackground;
-        _layerHit = Layer.RaycastEndStop;
-    }
-
-    RaycastHit? RaycastForLayer(Layer layer)
-    {
-        int layerMask = 1 << (int)layer; // See Unity docs for mask formation
-        Ray ray = _viewCamera.ScreenPointToRay(Input.mousePosition);
-
-        RaycastHit hit; // used as an out parameter
-        bool hasHit = Physics.Raycast(ray, out hit, distanceToBackground, layerMask);
-        if (hasHit)
+        private RaycastHit? RaycastForLayer(Layer layer)
         {
-            return hit;
-        }
-        return null;
-    }
-    
-    public RaycastHit hit
-    {
-        get { return _raycastHit; }
-    }
+            int layerMask = 1 << (int)layer;
+            Ray ray = _viewCamera.ScreenPointToRay(Input.mousePosition);
 
-    public Layer currentLayerHit
-    {
-        get { return _layerHit; }
+            bool hasHit = Physics.Raycast(ray, out RaycastHit hitInfo, distanceToBackground, layerMask);
+            if (hasHit)
+            {
+                return hitInfo;
+            }
+            return null;
+        }
+    
+        public RaycastHit hit
+        {
+            get { return _raycastHit; }
+        }
+
+        public Layer currentLayerHit
+        {
+            get { return _layerHit; }
+        }
     }
 }
