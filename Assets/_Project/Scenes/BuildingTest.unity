@@ -832,12 +832,12 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1099187195}
-        m_TargetAssemblyTypeName: BuildingsGrid, Assembly-CSharp
+        m_TargetAssemblyTypeName: _Project.Scripts.BuildingsGrid, Assembly-CSharp
         m_MethodName: StartPlacingBuilding
         m_Mode: 2
         m_Arguments:
           m_ObjectArgument: {fileID: 1413039443, guid: c5c2b378e55a2a14b8f876d61ed01cd6, type: 3}
-          m_ObjectArgumentAssemblyTypeName: Building, Assembly-CSharp
+          m_ObjectArgumentAssemblyTypeName: _Project.Scripts.Building, Assembly-CSharp
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
