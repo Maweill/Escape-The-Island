@@ -9,9 +9,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9541877fb4fd5d442bf3532925cb77d9, type: 3}
-  m_Name: TreeDescriptor
+  m_Script: {fileID: 11500000, guid: 81dc11b3a27acde4fbf7d1f77f961adc, type: 3}
+  m_Name: StoneDescriptor
   m_EditorClassIdentifier: 
-  ResourceType: 0
-  ItemDescriptor: {fileID: 11400000, guid: f23af1f9ece781546b53e4606c367b6f, type: 2}
-  Hp: 100
+  Type: 1
+  ItemPrefab: {fileID: 7592115681461521336, guid: db374ac1420be6343b6273fdb7a04331, type: 3}
+  Quantity: 10
+  Name: Stone

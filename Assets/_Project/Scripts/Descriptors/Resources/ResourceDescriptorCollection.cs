@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
-using _Project.Scripts.EnvironmentResources;
+using _Project.Scripts.Resources;
 using UnityEngine;
 
 namespace _Project.Scripts.Descriptors.Resources

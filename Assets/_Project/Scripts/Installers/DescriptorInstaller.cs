@@ -16,14 +16,17 @@ namespace _Project.Scripts.Installers
 		[SerializeField] 
 		private ResourceDescriptorCollection _resourceDescriptorCollection = null!;
 		[SerializeField]
-		private AnimalDescriptorCollection _animalDescriptorCollection = null!;
+		private AnimalAreaDescriptorCollection animalAreaDescriptorCollection = null!;
+		[SerializeField]
+		private ItemDescriptorCollection _itemDescriptorCollection = null!;
 		
 		public override void InstallBindings()
 		{
 			Container.BindInstance(_playerDescriptor).AsSingle();
 			Container.BindInstance(_locationDescriptor).AsSingle();
 			Container.BindInstance(_resourceDescriptorCollection).AsSingle();
-			Container.BindInstance(_animalDescriptorCollection).AsSingle();
+			Container.BindInstance(animalAreaDescriptorCollection).AsSingle();
+			Container.BindInstance(_itemDescriptorCollection).AsSingle();
 		}
 	}
 }

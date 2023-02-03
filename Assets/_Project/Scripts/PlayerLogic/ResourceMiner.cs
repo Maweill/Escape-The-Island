@@ -1,5 +1,5 @@
 using _Project.Scripts.Descriptors;
-using _Project.Scripts.EnvironmentResources;
+using _Project.Scripts.Resources;
 using UnityEngine;
 using Zenject;
 

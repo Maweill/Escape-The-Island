@@ -2,7 +2,6 @@ using _Project.Scripts.AI;
 using _Project.Scripts.Descriptors;
 using _Project.Scripts.Descriptors.Animals;
 using _Project.Scripts.Descriptors.Resources;
-using _Project.Scripts.EnvironmentResources;
 using _Project.Scripts.Factories;
 using _Project.Scripts.Resources;
 using UnityEngine;
@@ -18,9 +17,9 @@ namespace _Project.Scripts
 		private LocationDescriptor _locationDescriptor = null!;
 		[Inject] 
 		private ResourceDescriptorCollection _resourceDescriptorCollection = null!;
-		[Inject] 
-		private AnimalAreaDescriptorCollection _animalDescriptorCollection = null!;
-		
+		[Inject]
+		private AnimalAreaDescriptorCollection _animalAreaDescriptorCollection = null!;
+
 		private void Awake()
 		{
 			_gameFactory.CreatePlayer(_locationDescriptor.InitialPlayerPositionPoint);
@@ -33,7 +32,7 @@ namespace _Project.Scripts
 			foreach (Resource resource in FindObjectsOfType<Resource>())
 			{
 				ResourceDescriptor descriptor = _resourceDescriptorCollection.GetDescriptor(resource.Type);
-				resource.Init(descriptor.Hp, descriptor.ItemPrefab);
+				resource.Init(descriptor.Hp, descriptor.ItemDescriptor);
 			}
 		}
 
@@ -41,8 +40,8 @@ namespace _Project.Scripts
 		{
 			foreach (AnimalArea animalArea in FindObjectsOfType<AnimalArea>())
 			{
-				AnimalAreaDescriptor descriptor = _animalDescriptorCollection.GetDescriptor(animalArea.AnimalType);
-				animalArea.Init(descriptor.AnimalPrefab, descriptor.WalkRadius, descriptor.PositionsChangeDelay, descriptor.AnimalsNumber);
+				AnimalAreaDescriptor areaDescriptor = _animalAreaDescriptorCollection.GetDescriptor(animalArea.AnimalType);
+				animalArea.Init(areaDescriptor.AnimalPrefab, areaDescriptor.WalkRadius, areaDescriptor.PositionsChangeDelay, areaDescriptor.AnimalsNumber);
 			}
 		}
 	}
