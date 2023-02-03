@@ -4,7 +4,7 @@ using UnityEngine;
 namespace _Project.Scripts.Descriptors.Animals
 {
     [CreateAssetMenu(fileName = "AnimalDescriptor", menuName = "Descriptors/Animal", order = 0)]
-    public class AnimalDescriptor : ScriptableObject
+    public class AnimalAreaDescriptor : ScriptableObject
     {
         public AnimalType AnimalType;
         public GameObject AnimalPrefab = null!;

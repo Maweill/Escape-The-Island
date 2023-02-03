@@ -1,9 +1,6 @@
-using System;
-using System.Collections.Generic;
-using Cysharp.Threading.Tasks;
+using _Project.Scripts.Descriptors.Animals;
 using UnityEngine;
-using UnityEngine.AI;
-using Random = UnityEngine.Random;
+using Zenject;
 
 namespace _Project.Scripts.AI
 {
@@ -12,11 +9,11 @@ namespace _Project.Scripts.AI
         [SerializeField] 
         private AnimalType _animalType;
         
+        [Inject]
+        private AssetProvider _assetProvider = null!;
         private float _walkRadius;
         private float _positionsChangeDelay;
         private GameObject _animalPrefab = null!;
-        
-        private readonly List<NavMeshAgent> _animalAgents = new();
 
         public void Init(GameObject animalPrefab, float walkRadius, float positionsChangeDelay, int animalsNumber)
         {
@@ -25,7 +22,6 @@ namespace _Project.Scripts.AI
             _positionsChangeDelay = positionsChangeDelay;
             
             SpawnAnimals(animalsNumber);
-            SetPositionsForAnimals();
         }
 
         private void OnDrawGizmosSelected()
@@ -38,21 +34,7 @@ namespace _Project.Scripts.AI
         {
             for (int i = 0; i < animalsNumber; i++)
             {
-                _animalAgents.Add(Instantiate(_animalPrefab, transform).GetComponent<NavMeshAgent>());
-            }
-        }
-
-        private async void SetPositionsForAnimals()
-        {
-            while (_animalAgents.Count > 0)
-            {
-                foreach (NavMeshAgent animal in _animalAgents)
-                {
-                    Vector3 randomDirection = transform.position + Random.insideUnitSphere * _walkRadius;
-                    NavMesh.SamplePosition(randomDirection, out NavMeshHit hit, _walkRadius, NavMesh.AllAreas);
-                    animal.destination = hit.position;
-                }
-                await UniTask.Delay(TimeSpan.FromSeconds(_positionsChangeDelay));
+                _assetProvider.CreateAsset<Animal>(_animalPrefab, transform).GetComponent<Animal>().Init(_walkRadius, _positionsChangeDelay);
             }
         }
 

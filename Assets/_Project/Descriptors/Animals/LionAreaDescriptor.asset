@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 75d59111f2db499990f941e78378682d, type: 3}
-  m_Name: RabbitDescriptor
+  m_Name: LionAreaDescriptor
   m_EditorClassIdentifier: 
-  AnimalType: 1
-  AnimalPrefab: {fileID: 9047764400613908142, guid: 3e57e4480e78d7b4abb20efd34707a02, type: 3}
-  WalkRadius: 7
-  PositionsChangeDelay: 3
-  AnimalsNumber: 5
+  AnimalType: 0
+  AnimalPrefab: {fileID: 7231248861672794196, guid: 1e4d641b6a7bc0241bcfdf71d24cc6e6, type: 3}
+  WalkRadius: 5
+  PositionsChangeDelay: 5
+  AnimalsNumber: 3

@@ -1,25 +1,29 @@
+using _Project.Scripts.Descriptors.Resources;
 using DG.Tweening;
 using UnityEngine;
+using Zenject;
 
-namespace _Project.Scripts.EnvironmentResources
+namespace _Project.Scripts.Resources
 {
     [RequireComponent(typeof(Collider))]
     public class Resource : MonoBehaviour
     {
         [SerializeField] 
         private ResourceType _type;
-
+        
+        [Inject]
+        private AssetProvider _assetProvider = null!;
         private const float ITEM_DROP_RADIUS = 1.5f;
         private Collider _collider;
         private float _currentHp;
-        private GameObject _resourceItemPrefab = null!;
+        private ItemDescriptor _itemDescriptor = null!;
 
         public ResourceType Type { get { return _type; }}
 
-        public void Init(float baseHp, GameObject itemPrefab)
+        public void Init(float baseHp, ItemDescriptor itemDescriptor)
         {
             _currentHp = baseHp;
-            _resourceItemPrefab = itemPrefab;
+            _itemDescriptor = itemDescriptor;
         }
         
         public bool TryToDestroy(float damage)
@@ -52,7 +56,8 @@ namespace _Project.Scripts.EnvironmentResources
         {
             Vector3 randomPointInSphere = Random.insideUnitCircle * ITEM_DROP_RADIUS;
             Vector3 spawnPoint = transform.position + new Vector3(randomPointInSphere.x, 0, randomPointInSphere.z);
-            Instantiate(_resourceItemPrefab, spawnPoint, Quaternion.identity);
+            Item item = _assetProvider.CreateAsset<Item>(_itemDescriptor.ItemPrefab, spawnPoint).GetComponent<Item>();
+            item.Init(_itemDescriptor.Quantity);
         }
 
         private void PlayGetDamageAnim()
