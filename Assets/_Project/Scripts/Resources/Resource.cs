@@ -2,6 +2,7 @@ using _Project.Scripts.Descriptors.Resources;
 using DG.Tweening;
 using UnityEngine;
 using Zenject;
+using Zenject.ReflectionBaking.Mono.Cecil;
 
 namespace _Project.Scripts.Resources
 {

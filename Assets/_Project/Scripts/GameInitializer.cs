@@ -4,6 +4,7 @@ using _Project.Scripts.Descriptors.Animals;
 using _Project.Scripts.Descriptors.Resources;
 using _Project.Scripts.EnvironmentResources;
 using _Project.Scripts.Factories;
+using _Project.Scripts.Resources;
 using UnityEngine;
 using Zenject;
 
@@ -18,7 +19,7 @@ namespace _Project.Scripts
 		[Inject] 
 		private ResourceDescriptorCollection _resourceDescriptorCollection = null!;
 		[Inject] 
-		private AnimalDescriptorCollection _animalDescriptorCollection = null!;
+		private AnimalAreaDescriptorCollection _animalDescriptorCollection = null!;
 		
 		private void Awake()
 		{
@@ -40,7 +41,7 @@ namespace _Project.Scripts
 		{
 			foreach (AnimalArea animalArea in FindObjectsOfType<AnimalArea>())
 			{
-				AnimalDescriptor descriptor = _animalDescriptorCollection.GetDescriptor(animalArea.AnimalType);
+				AnimalAreaDescriptor descriptor = _animalDescriptorCollection.GetDescriptor(animalArea.AnimalType);
 				animalArea.Init(descriptor.AnimalPrefab, descriptor.WalkRadius, descriptor.PositionsChangeDelay, descriptor.AnimalsNumber);
 			}
 		}
