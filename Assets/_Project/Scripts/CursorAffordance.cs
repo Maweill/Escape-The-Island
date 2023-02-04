@@ -1,42 +1,53 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent (typeof(CameraRaycaster))]
-public class CursorAffordance : MonoBehaviour
+namespace _Project.Scripts
 {
-
-    [SerializeField] Texture2D walkCursor = null;
-    [SerializeField] Texture2D unknownCursor = null;
-    [SerializeField] Texture2D targetCursor = null;
-    [SerializeField] Vector2 cursorHotspot = new Vector2(96, 96);
-
-     CameraRaycaster cameraRaycaster;
-
-    // Start is called before the first frame update
-    void Start()
+    [RequireComponent (typeof(CameraRaycaster))]
+    public class CursorAffordance : MonoBehaviour
     {
-        cameraRaycaster = GetComponent<CameraRaycaster>();
-        cameraRaycaster.onLayerChange += OnOnLayerChanged;
-    }
+        [SerializeField] 
+        private Texture2D? _walkCursor;
+        [SerializeField] 
+        private Texture2D? _unknownCursor;
+        [SerializeField]
+        private Texture2D? _targetCursor;
+        [SerializeField] 
+        private Vector2 _cursorHotspot = new Vector2(96, 96);
 
-    // Update is called once per frame
-    void OnOnLayerChanged(Layer newLayer)
-    {
-        switch(newLayer)
+        private CameraRaycaster _cameraRaycaster = null!;
+
+        private void Awake()
         {
-            case Layer.Walkable:
-                Cursor.SetCursor(walkCursor, cursorHotspot, CursorMode.Auto);
-                break;
-            case Layer.RaycastEndStop:
-                Cursor.SetCursor(unknownCursor, cursorHotspot, CursorMode.Auto);
-                break;
-            case Layer.Enemy:
-                Cursor.SetCursor(targetCursor, cursorHotspot, CursorMode.Auto);
-                break;
-            default:
-                Debug.LogError("Error cursor");
-                return;
+            _cameraRaycaster = GetComponent<CameraRaycaster>();
+        }
+
+        private void OnEnable()
+        {
+            _cameraRaycaster.OnLayerChange += OnOnLayerChanged;
+        }
+
+        private void OnDisable()
+        {
+            _cameraRaycaster.OnLayerChange -= OnOnLayerChanged;
+        }
+
+        private void OnOnLayerChanged(Layer newLayer)
+        {
+            switch(newLayer)
+            {
+                case Layer.Walkable:
+                    Cursor.SetCursor(_walkCursor, _cursorHotspot, CursorMode.Auto);
+                    break;
+                case Layer.RaycastEndStop:
+                    Cursor.SetCursor(_unknownCursor, _cursorHotspot, CursorMode.Auto);
+                    break;
+                case Layer.Enemy:
+                    Cursor.SetCursor(_targetCursor, _cursorHotspot, CursorMode.Auto);
+                    break;
+                default:
+                    Debug.LogError($"Trying to switch cursor but layer is invalid. layer={newLayer}");
+                    return;
+            }
         }
     }
 }
