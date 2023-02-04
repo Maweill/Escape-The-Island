@@ -15,7 +15,7 @@ namespace _Project.Scripts
         {
             _player = _gameFactory.Player;
         }
-
+        
         private void LateUpdate()
         {
             transform.position = _player.transform.position;
