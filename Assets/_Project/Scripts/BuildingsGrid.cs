@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using Zenject;
 
 namespace _Project.Scripts
 {
@@ -8,7 +9,10 @@ namespace _Project.Scripts
         private Vector2Int _gridSize = new Vector2Int(10, 10);
         [SerializeField]
         private GameObject _originPoint = null!;
-    
+
+        [Inject] 
+        private AssetProvider _assetProvider = null!;
+        
         private Building[,] _grid = null!;
         private Building? _flyingBuilding;
         private Camera _mainCamera = null!;
@@ -27,7 +31,8 @@ namespace _Project.Scripts
             {
                 Destroy(_flyingBuilding.gameObject);
             }
-            _flyingBuilding = Instantiate(buildingPrefab);
+
+            _flyingBuilding = _assetProvider.CreateAsset<Building>(buildingPrefab, transform.position);
         }
 
         private void Update()
@@ -44,8 +49,8 @@ namespace _Project.Scripts
             }
             GetPlacementWorldCoordinates(ray, hit.point, out int globalX, out int globalY);
         
-            int localX = globalX - (int)_originPoint.transform.position.x;
-            int localY = globalY - (int)_originPoint.transform.position.z;
+            int localX = globalX - (int) _originPoint.transform.position.x;
+            int localY = globalY - (int) _originPoint.transform.position.z;
             bool isPlaceAvailable = !(IsBuildingOutOfGrid(localX, localY) || IsPlaceTaken(localX, localY));
         
             _flyingBuilding.transform.position = new Vector3(globalX, 0, globalY);
@@ -60,8 +65,8 @@ namespace _Project.Scripts
 
         private void GetPlacementWorldCoordinates(Ray ray, Vector3 position, out int x, out int y)
         {
-            x = (int)Mathf.Floor(position.x);
-            y = (int)Mathf.Floor(position.z);
+            x = (int) Mathf.Floor(position.x);
+            y = (int) Mathf.Floor(position.z);
         }
     
         private void PlaceFlyingBuilding(int placeX, int placeY)

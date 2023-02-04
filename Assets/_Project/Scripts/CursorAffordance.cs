@@ -45,7 +45,7 @@ namespace _Project.Scripts
                     Cursor.SetCursor(_targetCursor, _cursorHotspot, CursorMode.Auto);
                     break;
                 default:
-                    Debug.LogError("Error cursor");
+                    Debug.LogError($"Trying to switch cursor but layer is invalid. layer={newLayer}");
                     return;
             }
         }

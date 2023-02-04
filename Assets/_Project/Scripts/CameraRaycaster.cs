@@ -26,7 +26,7 @@ namespace _Project.Scripts
 
         private void Update()
         {
-            // Look for and return priority layer hit
+            // Ищет и возвращает приоритетный layer hit
             foreach (Layer layer in _layerPriorities)
             {
                 RaycastHit? hit = RaycastForLayer(layer);
@@ -44,7 +44,7 @@ namespace _Project.Scripts
                 OnLayerChange?.Invoke(layer);
                 return;
             }
-            // Otherwise return background hit
+            // В другом случае возвращает background hit
             _raycastHit.distance = distanceToBackground;
             _layerHit = Layer.RaycastEndStop;
         }
