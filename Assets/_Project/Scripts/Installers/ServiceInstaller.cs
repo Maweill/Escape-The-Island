@@ -12,9 +12,10 @@ namespace _Project.Scripts.Installers
 		
 		public override void InstallBindings()
 		{
-			Container.Bind<AssetProvider>().AsSingle();
+			Container.Bind<AssetProviderService>().AsSingle();
 			Container.Bind<PlayerInputService>().FromComponentInNewPrefab(_playerInputServicePrefab).AsSingle();
-			Container.Bind<GameFactory>().AsSingle();
+			Container.Bind<GameFactoryService>().AsSingle();
+			Container.Bind<InventoryService>().AsSingle();
 		}
 	}
 }

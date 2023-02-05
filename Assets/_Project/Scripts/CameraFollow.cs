@@ -7,13 +7,13 @@ namespace _Project.Scripts
     public class CameraFollow : MonoBehaviour
     {
         [Inject]
-        private GameFactory _gameFactory = null!;
+        private GameFactoryService _gameFactoryService = null!;
 
         private GameObject _player = null!;
 
         private void Start()
         {
-            _player = _gameFactory.Player;
+            _player = _gameFactoryService.Player;
         }
         
         private void LateUpdate()

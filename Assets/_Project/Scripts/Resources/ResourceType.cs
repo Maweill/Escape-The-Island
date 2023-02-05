@@ -1,4 +1,4 @@
-namespace _Project.Scripts.EnvironmentResources
+namespace _Project.Scripts.Resources
 {
     public enum ResourceType
     {
