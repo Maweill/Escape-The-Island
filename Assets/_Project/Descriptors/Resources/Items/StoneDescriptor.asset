@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: StoneDescriptor
   m_EditorClassIdentifier: 
   Type: 1
-  ItemPrefab: {fileID: 7592115681461521336, guid: db374ac1420be6343b6273fdb7a04331, type: 3}
+  ResourceItemPrefab: {fileID: -6025739822103025016, guid: db374ac1420be6343b6273fdb7a04331, type: 3}
   Quantity: 10
   Name: Stone

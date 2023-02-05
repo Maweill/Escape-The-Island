@@ -1,33 +1,39 @@
 using System.Collections.Generic;
 using _Project.Scripts.Descriptors.Resources;
+using UnityEngine;
 
 namespace _Project.Scripts.PlayerLogic
 {
     public class InventoryModel
     {
-        private readonly Dictionary<ItemDescriptor, int> _items = new();
+        private readonly Dictionary<ResourceItemDescriptor, int> _items = new();
 
-        public void AddItem(ItemDescriptor item, int quantity)
+        public void AddItem(ResourceItemDescriptor resourceItem, int quantity)
         {
-            if (_items.ContainsKey(item))
+            if (_items.ContainsKey(resourceItem))
             {
-                _items[item] += quantity;
+                _items[resourceItem] += quantity;
             }
             else
             {
-                _items[item] = quantity;
+                _items[resourceItem] = quantity;
             }
         }
 
-        public void RemoveItem(ItemDescriptor item, int quantity)
+        public void RemoveItem(ResourceItemDescriptor resourceItem, int quantity)
         {
-            _items[item] -= quantity;
-            if (_items[item] <= 0)
+            if (_items[resourceItem] < quantity)
             {
-                _items.Remove(item);
+                Debug.LogWarning($"Количество ресурса name={resourceItem.Name} в инвентаре меньше, чем вычитаемое количество");
+            }
+            
+            _items[resourceItem] -= quantity;
+            if (_items[resourceItem] <= 0)
+            {
+                _items.Remove(resourceItem);
             }
         }
 
-        public Dictionary<ItemDescriptor, int> Items { get { return _items; } }
+        public Dictionary<ResourceItemDescriptor, int> Items { get { return _items; } }
     }
 }

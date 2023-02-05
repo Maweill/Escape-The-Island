@@ -18,24 +18,23 @@ namespace _Project.Scripts.PlayerLogic
             _inventoryModel = new InventoryModel();
         }
 
-        public bool TryCollectItem(ItemType type, int quantity)
+        public bool TryCollectItem(ResourceItemType type, int quantity)
         {
             // TODO Проверка на свободное место в инвентаре
             _inventoryModel.AddItem(_itemDescriptorCollection.GetDescriptor(type), quantity);
             return true;
         }
 
-        public bool TryRemoveItem(ItemType type, int quantity)
+        public bool TryRemoveItem(ResourceItemType type, int quantity)
         {
-            ItemDescriptor itemDescriptor = _itemDescriptorCollection.GetDescriptor(type);
-            if (_inventoryModel.Items[itemDescriptor] <= quantity)
+            ResourceItemDescriptor resourceItemDescriptor = _itemDescriptorCollection.GetDescriptor(type);
+            if (_inventoryModel.Items[resourceItemDescriptor] <= quantity)
             {
                 return false;
             }
 
-            _inventoryModel.RemoveItem(itemDescriptor, quantity);
+            _inventoryModel.RemoveItem(resourceItemDescriptor, quantity);
             return true;
-
         }
     }
 }

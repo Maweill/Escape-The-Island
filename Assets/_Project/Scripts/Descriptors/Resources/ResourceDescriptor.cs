@@ -7,7 +7,7 @@ namespace _Project.Scripts.Descriptors.Resources
     public class ResourceDescriptor : ScriptableObject
     {
         public ResourceType ResourceType;
-        public ItemDescriptor ItemDescriptor = null!;
+        public ResourceItemDescriptor resourceItemDescriptor = null!;
         public float Hp;
     }
 }

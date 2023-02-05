@@ -18,27 +18,25 @@ namespace _Project.Scripts.PlayerLogic
 
         private void OnTriggerStay(Collider other)
         {
-            if (other.TryGetComponent(out Resource resource)) 
+            if (other.TryGetComponent(out ResourceItem resourceItem))
+            {
+                _itemCollector.CurrentItemForCollecting = resourceItem;
+            }
+            else if (other.TryGetComponent(out Resource resource)) 
             {
                 _resourceMiner.CurrentResourceForMining = resource;
-            }
-
-            if (other.TryGetComponent(out Item item))
-            {
-                _itemCollector.CurrentItemForCollecting = item;
             }
         }
 
         private void OnTriggerExit(Collider other)
         {
-            if (other.TryGetComponent(out Resource resource)) 
-            {
-                _resourceMiner.CurrentResourceForMining = null;
-            }
-            
-            if (other.TryGetComponent(out Item item))
+            if (other.TryGetComponent(out ResourceItem resourceItem))
             {
                 _itemCollector.CurrentItemForCollecting = null;
+            }
+            else if (other.TryGetComponent(out Resource resource)) 
+            {
+                _resourceMiner.CurrentResourceForMining = null;
             }
         }
     }

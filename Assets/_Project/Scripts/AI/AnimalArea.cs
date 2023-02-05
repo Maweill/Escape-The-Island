@@ -11,11 +11,12 @@ namespace _Project.Scripts.AI
         
         [Inject]
         private AssetProviderService _assetProviderService = null!;
+        
         private float _walkRadius;
         private float _positionsChangeDelay;
-        private GameObject _animalPrefab = null!;
+        private Animal _animalPrefab = null!;
 
-        public void Init(GameObject animalPrefab, float walkRadius, float positionsChangeDelay, int animalsNumber)
+        public void Init(Animal animalPrefab, float walkRadius, float positionsChangeDelay, int animalsNumber)
         {
             _animalPrefab = animalPrefab;
             _walkRadius = walkRadius;
@@ -34,7 +35,7 @@ namespace _Project.Scripts.AI
         {
             for (int i = 0; i < animalsNumber; i++)
             {
-                _assetProviderService.CreateAsset<Animal>(_animalPrefab, transform).GetComponent<Animal>().Init(_walkRadius, _positionsChangeDelay);
+                _assetProviderService.CreateAsset<Animal>(_animalPrefab, transform).Init(_walkRadius, _positionsChangeDelay);
             }
         }
 

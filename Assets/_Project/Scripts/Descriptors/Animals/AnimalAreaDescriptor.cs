@@ -7,7 +7,7 @@ namespace _Project.Scripts.Descriptors.Animals
     public class AnimalAreaDescriptor : ScriptableObject
     {
         public AnimalType AnimalType;
-        public GameObject AnimalPrefab = null!;
+        public Animal AnimalPrefab = null!;
         public float WalkRadius;
         public float PositionsChangeDelay;
         public int AnimalsNumber;

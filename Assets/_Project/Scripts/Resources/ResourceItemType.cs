@@ -1,6 +1,6 @@
 namespace _Project.Scripts.Resources
 {
-    public enum ItemType
+    public enum ResourceItemType
     {
         Wood,
         Stone

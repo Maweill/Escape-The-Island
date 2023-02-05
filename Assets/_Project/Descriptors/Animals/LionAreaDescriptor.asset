@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: LionAreaDescriptor
   m_EditorClassIdentifier: 
   AnimalType: 0
-  AnimalPrefab: {fileID: 7231248861672794196, guid: 1e4d641b6a7bc0241bcfdf71d24cc6e6, type: 3}
+  AnimalPrefab: {fileID: -8839126935223997856, guid: 1e4d641b6a7bc0241bcfdf71d24cc6e6, type: 3}
   WalkRadius: 5
   PositionsChangeDelay: 5
   AnimalsNumber: 3

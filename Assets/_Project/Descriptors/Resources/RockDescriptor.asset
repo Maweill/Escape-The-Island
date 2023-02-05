@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: RockDescriptor
   m_EditorClassIdentifier: 
   ResourceType: 1
-  ItemDescriptor: {fileID: 11400000, guid: bb550ffa59838de42a447084c886e0e2, type: 2}
+  resourceItemDescriptor: {fileID: 11400000, guid: bb550ffa59838de42a447084c886e0e2, type: 2}
   Hp: 300

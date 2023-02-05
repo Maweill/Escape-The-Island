@@ -25,7 +25,7 @@ namespace _Project.Scripts.Descriptors.Animals
 
         private async void SetDestination()
         {
-            while (gameObject)
+            while (gameObject != null)
             {
                 Vector3 randomDirection = transform.position + Random.insideUnitSphere * _walkRadius;
                 NavMesh.SamplePosition(randomDirection, out NavMeshHit hit, _walkRadius, NavMesh.AllAreas);

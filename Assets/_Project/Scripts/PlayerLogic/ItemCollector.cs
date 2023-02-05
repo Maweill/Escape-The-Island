@@ -13,7 +13,7 @@ namespace _Project.Scripts.PlayerLogic
         
         private bool _isCollecting;
 
-        public Item? CurrentItemForCollecting { get; set; }
+        public ResourceItem? CurrentItemForCollecting { get; set; }
 
         private void OnEnable()
         {
@@ -42,7 +42,7 @@ namespace _Project.Scripts.PlayerLogic
         {
             _isCollecting = true;
             // TODO Анимация
-            Debug.Log($"Collect item. name={CurrentItemForCollecting?.name}");
+            Debug.Log($"Collect resource item. name={CurrentItemForCollecting?.name}");
             CurrentItemForCollecting.Collect();
             _isCollecting = false;
         }

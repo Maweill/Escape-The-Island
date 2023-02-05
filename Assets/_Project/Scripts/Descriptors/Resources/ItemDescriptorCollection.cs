@@ -5,12 +5,12 @@ using UnityEngine;
 
 namespace _Project.Scripts.Descriptors.Resources
 {
-    [CreateAssetMenu(fileName = "ItemDescriptorCollection", menuName = "Descriptors/ItemCollection", order = 0)]
+    [CreateAssetMenu(fileName = "ResourceItemDescriptorCollection", menuName = "Descriptors/ResourceItemCollection", order = 0)]
     public class ItemDescriptorCollection : ScriptableObject
     {
-        public List<ItemDescriptor> Descriptors = null!;
+        public List<ResourceItemDescriptor> Descriptors = null!;
 
-        public ItemDescriptor GetDescriptor(ItemType type)
+        public ResourceItemDescriptor GetDescriptor(ResourceItemType type)
         {
             return Descriptors.First(descriptor => descriptor.Type == type);
         }

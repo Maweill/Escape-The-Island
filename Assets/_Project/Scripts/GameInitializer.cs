@@ -32,7 +32,7 @@ namespace _Project.Scripts
 			foreach (Resource resource in FindObjectsOfType<Resource>())
 			{
 				ResourceDescriptor descriptor = _resourceDescriptorCollection.GetDescriptor(resource.Type);
-				resource.Init(descriptor.Hp, descriptor.ItemDescriptor);
+				resource.Init(descriptor.Hp, descriptor.resourceItemDescriptor);
 			}
 		}
 

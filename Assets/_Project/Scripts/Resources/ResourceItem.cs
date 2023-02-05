@@ -2,10 +2,10 @@ using UnityEngine;
 
 namespace _Project.Scripts.Resources
 {
-    public class Item : MonoBehaviour
+    public class ResourceItem : MonoBehaviour
     {
         [SerializeField] 
-        private ItemType _type;
+        private ResourceItemType _type;
 
         public int Quantity { get; private set; }
 
@@ -25,6 +25,6 @@ namespace _Project.Scripts.Resources
             Destroy(gameObject);
         }
 
-        public ItemType Type { get { return _type; } }
+        public ResourceItemType Type { get { return _type; } }
     }
 }
