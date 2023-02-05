@@ -4,21 +4,16 @@ using Zenject;
 
 namespace _Project.Scripts.PlayerLogic
 {
-    [RequireComponent(typeof(Inventory))]
     public class ItemCollector : MonoBehaviour
     {
         [Inject]
         private PlayerInputService _playerInputService = null!;
-
-        private Inventory _inventory = null!;
+        [Inject]
+        private InventoryService _inventoryService = null!;
+        
         private bool _isCollecting;
 
         public Item? CurrentItemForCollecting { get; set; }
-
-        private void Awake()
-        {
-            _inventory = GetComponent<Inventory>();
-        }
 
         private void OnEnable()
         {
@@ -37,7 +32,7 @@ namespace _Project.Scripts.PlayerLogic
                 return;
             }
 
-            if (_inventory.TryCollectItem(CurrentItemForCollecting))
+            if (_inventoryService.TryCollectItem(CurrentItemForCollecting.Type, CurrentItemForCollecting.Quantity))
             {
                 StartCollecting();
             }

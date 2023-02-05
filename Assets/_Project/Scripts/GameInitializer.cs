@@ -12,7 +12,7 @@ namespace _Project.Scripts
 	public class GameInitializer : MonoBehaviour
 	{
 		[Inject]
-		private GameFactory _gameFactory = null!;
+		private GameFactoryService _gameFactoryService = null!;
 		[Inject]
 		private LocationDescriptor _locationDescriptor = null!;
 		[Inject] 
@@ -22,7 +22,7 @@ namespace _Project.Scripts
 
 		private void Awake()
 		{
-			_gameFactory.CreatePlayer(_locationDescriptor.InitialPlayerPositionPoint);
+			_gameFactoryService.CreatePlayer(_locationDescriptor.InitialPlayerPositionPoint);
 			InitResources();
 			InitAnimalAreas();
 		}

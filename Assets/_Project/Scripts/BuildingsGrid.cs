@@ -11,7 +11,7 @@ namespace _Project.Scripts
         private GameObject _originPoint = null!;
 
         [Inject] 
-        private AssetProvider _assetProvider = null!;
+        private AssetProviderService _assetProviderService = null!;
         
         private Building[,] _grid = null!;
         private Building? _flyingBuilding;
@@ -32,7 +32,7 @@ namespace _Project.Scripts
                 Destroy(_flyingBuilding.gameObject);
             }
 
-            _flyingBuilding = _assetProvider.CreateAsset<Building>(buildingPrefab, transform.position);
+            _flyingBuilding = _assetProviderService.CreateAsset<Building>(buildingPrefab, transform.position);
         }
 
         private void Update()

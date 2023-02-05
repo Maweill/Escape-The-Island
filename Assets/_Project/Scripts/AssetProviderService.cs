@@ -5,7 +5,7 @@ using Zenject;
 namespace _Project.Scripts
 {
 	[UsedImplicitly]
-	public class AssetProvider
+	public class AssetProviderService
 	{
 		[Inject]
 		private DiContainer _diContainer = null!;

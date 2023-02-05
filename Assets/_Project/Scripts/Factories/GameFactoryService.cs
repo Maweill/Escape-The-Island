@@ -8,10 +8,10 @@ using Object = UnityEngine.Object;
 namespace _Project.Scripts.Factories
 {
 	[UsedImplicitly]
-	public class GameFactory
+	public class GameFactoryService
 	{
 		[Inject]
-		private AssetProvider _assetProvider = null!;
+		private AssetProviderService _assetProviderService = null!;
 		[Inject]
 		private PlayerDescriptor _playerDescriptor = null!;
 		
@@ -19,7 +19,7 @@ namespace _Project.Scripts.Factories
 
 		public GameObject CreatePlayer(Vector3 position)
 		{
-			GameObject player = _assetProvider.CreateAsset<PlayerMovement>(_playerDescriptor.Prefab, position).gameObject;
+			GameObject player = _assetProviderService.CreateAsset<PlayerMovement>(_playerDescriptor.Prefab, position).gameObject;
 			Player = player;
 			return player;
 		}

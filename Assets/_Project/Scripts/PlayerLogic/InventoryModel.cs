@@ -21,11 +21,6 @@ namespace _Project.Scripts.PlayerLogic
 
         public void RemoveItem(ItemDescriptor item, int quantity)
         {
-            if (!_items.ContainsKey(item))
-            {
-                return;
-            }
-
             _items[item] -= quantity;
             if (_items[item] <= 0)
             {

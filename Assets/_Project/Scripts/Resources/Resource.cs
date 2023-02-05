@@ -12,7 +12,7 @@ namespace _Project.Scripts.Resources
         private ResourceType _type;
         
         [Inject]
-        private AssetProvider _assetProvider = null!;
+        private AssetProviderService _assetProviderService = null!;
         private const float ITEM_DROP_RADIUS = 1.5f;
         private Collider _collider;
         private float _currentHp;
@@ -56,7 +56,7 @@ namespace _Project.Scripts.Resources
         {
             Vector3 randomPointInSphere = Random.insideUnitCircle * ITEM_DROP_RADIUS;
             Vector3 spawnPoint = transform.position + new Vector3(randomPointInSphere.x, 0, randomPointInSphere.z);
-            Item item = _assetProvider.CreateAsset<Item>(_itemDescriptor.ItemPrefab, spawnPoint).GetComponent<Item>();
+            Item item = _assetProviderService.CreateAsset<Item>(_itemDescriptor.ItemPrefab, spawnPoint).GetComponent<Item>();
             item.Init(_itemDescriptor.Quantity);
         }
 
