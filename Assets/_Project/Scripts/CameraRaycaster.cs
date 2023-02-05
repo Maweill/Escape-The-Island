@@ -7,21 +7,21 @@ namespace _Project.Scripts
     {
         [SerializeField] 
         private float distanceToBackground = 100f;
-        
-        public event Action<Layer> OnLayerChange = null!;
+
+        public event Action<Layer>? OnLayerChange;
         private Camera _viewCamera = null!;
         private RaycastHit _raycastHit;
         private Layer _layerHit;
         
         private readonly Layer[] _layerPriorities = 
         {
-            Layer.Enemy,
-            Layer.Walkable
+                Layer.Enemy,
+                Layer.Walkable
         };
         
         private void Start() 
         {
-            _viewCamera = Camera.main;
+            _viewCamera = Camera.main!;
         }
 
         private void Update()
@@ -29,12 +29,12 @@ namespace _Project.Scripts
             // Ищет и возвращает приоритетный layer hit
             foreach (Layer layer in _layerPriorities)
             {
-                RaycastHit? hit = RaycastForLayer(layer);
-                if (!hit.HasValue)
+                RaycastHit? raycastHit = RaycastForLayer(layer);
+                if (!raycastHit.HasValue)
                 {
                     continue;
                 }
-                _raycastHit = hit.Value;
+                _raycastHit = raycastHit.Value;
             
                 if (_layerHit == layer)
                 {
@@ -51,7 +51,7 @@ namespace _Project.Scripts
 
         private RaycastHit? RaycastForLayer(Layer layer)
         {
-            int layerMask = 1 << (int)layer;
+            int layerMask = 1 << (int) layer;
             Ray ray = _viewCamera.ScreenPointToRay(Input.mousePosition);
 
             bool hasHit = Physics.Raycast(ray, out RaycastHit hitInfo, distanceToBackground, layerMask);

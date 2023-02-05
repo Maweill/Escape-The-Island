@@ -1,4 +1,5 @@
 using _Project.Scripts.Descriptors;
+using _Project.Scripts.Logger;
 using _Project.Scripts.Resources;
 using UnityEngine;
 using Zenject;
@@ -7,6 +8,8 @@ namespace _Project.Scripts.PlayerLogic
 {
     public class ResourceMiner : MonoBehaviour
     {
+        private static readonly ICustomLogger _logger = LoggerFactory.GetLogger<ResourceMiner>();
+        
         [Inject]
         private PlayerInputService _playerInputService = null!;
         [Inject] 
@@ -39,8 +42,8 @@ namespace _Project.Scripts.PlayerLogic
         {
             _isMining = true;
             // TODO Анимация
-            Debug.Log("Mining hit");
-            if (CurrentResourceForMining.TryToDestroy(_playerDescriptor.BaseDamageToResources)) {
+            _logger.Debug("Mining hit");
+            if (CurrentResourceForMining != null && CurrentResourceForMining.TryToDestroy(_playerDescriptor.BaseDamageToResources)) {
                 CurrentResourceForMining = null;
             }
             _isMining = false;

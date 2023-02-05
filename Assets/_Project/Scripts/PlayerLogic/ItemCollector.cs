@@ -1,3 +1,4 @@
+using _Project.Scripts.Logger;
 using _Project.Scripts.Resources;
 using UnityEngine;
 using Zenject;
@@ -6,6 +7,8 @@ namespace _Project.Scripts.PlayerLogic
 {
     public class ItemCollector : MonoBehaviour
     {
+        private static readonly ICustomLogger _logger = LoggerFactory.GetLogger<ItemCollector>();
+        
         [Inject]
         private PlayerInputService _playerInputService = null!;
         [Inject]
@@ -42,7 +45,7 @@ namespace _Project.Scripts.PlayerLogic
         {
             _isCollecting = true;
             // TODO Анимация
-            Debug.Log($"Collect resource item. name={CurrentItemForCollecting?.name}");
+            _logger.Debug($"Collect resource item. name={CurrentItemForCollecting?.name}");
             CurrentItemForCollecting.Collect();
             _isCollecting = false;
         }

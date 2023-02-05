@@ -11,7 +11,7 @@ namespace _Project.Scripts.PlayerLogic
         [Inject]
         private ItemDescriptorCollection _itemDescriptorCollection = null!;
 
-        private readonly InventoryModel _inventoryModel = null!;
+        private readonly InventoryModel _inventoryModel;
 
         public InventoryService()
         {
