@@ -5,7 +5,7 @@ using Zenject;
 namespace _Project.Scripts
 {
 	[UsedImplicitly]
-	public class AssetProvider
+	public class AssetProviderService
 	{
 		[Inject]
 		private DiContainer _diContainer = null!;
@@ -16,5 +16,12 @@ namespace _Project.Scripts
 			instance.transform.position = position;
 			return instance;
 		}
+		
+		public T CreateAsset<T>(Object prefab, Transform parentTransform) where T : MonoBehaviour
+		{
+			T instance = CreateAsset<T>(prefab, parentTransform.position);
+			instance.transform.SetParent(parentTransform);
+			return instance;
+		} 
 	}
 }

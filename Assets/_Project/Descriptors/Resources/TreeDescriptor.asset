@@ -12,5 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9541877fb4fd5d442bf3532925cb77d9, type: 3}
   m_Name: TreeDescriptor
   m_EditorClassIdentifier: 
-  ItemPrefab: {fileID: 6985372608653405437, guid: 96bd8d3c7a984f449aa7d39a22c98746, type: 3}
+  ResourceType: 0
+  resourceItemDescriptor: {fileID: 11400000, guid: f23af1f9ece781546b53e4606c367b6f, type: 2}
   Hp: 100
