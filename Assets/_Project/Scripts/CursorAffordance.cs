@@ -1,10 +1,13 @@
+using _Project.Scripts.Logger;
 using UnityEngine;
 
 namespace _Project.Scripts
 {
-    [RequireComponent (typeof(CameraRaycaster))]
+    [RequireComponent(typeof(CameraRaycaster))]
     public class CursorAffordance : MonoBehaviour
     {
+        private static readonly ICustomLogger _logger = LoggerFactory.GetLogger<CursorAffordance>();
+        
         [SerializeField] 
         private Texture2D? _walkCursor;
         [SerializeField] 
@@ -33,7 +36,7 @@ namespace _Project.Scripts
 
         private void OnOnLayerChanged(Layer newLayer)
         {
-            switch(newLayer)
+            switch (newLayer)
             {
                 case Layer.Walkable:
                     Cursor.SetCursor(_walkCursor, _cursorHotspot, CursorMode.Auto);
@@ -45,7 +48,7 @@ namespace _Project.Scripts
                     Cursor.SetCursor(_targetCursor, _cursorHotspot, CursorMode.Auto);
                     break;
                 default:
-                    Debug.LogError($"Trying to switch cursor but layer is invalid. layer={newLayer}");
+                    _logger.Error($"Trying to switch cursor but layer is invalid. layer={newLayer}");
                     return;
             }
         }

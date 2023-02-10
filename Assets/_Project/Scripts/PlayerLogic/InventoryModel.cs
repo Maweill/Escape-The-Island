@@ -1,11 +1,13 @@
 using System.Collections.Generic;
 using _Project.Scripts.Descriptors.Resources;
-using UnityEngine;
+using _Project.Scripts.Logger;
 
 namespace _Project.Scripts.PlayerLogic
 {
     public class InventoryModel
     {
+        private static readonly ICustomLogger _logger = LoggerFactory.GetLogger<InventoryModel>();
+        
         private readonly Dictionary<ResourceItemDescriptor, int> _items = new();
 
         public void AddItem(ResourceItemDescriptor resourceItem, int quantity)
@@ -24,7 +26,7 @@ namespace _Project.Scripts.PlayerLogic
         {
             if (_items[resourceItem] < quantity)
             {
-                Debug.LogWarning($"Количество ресурса name={resourceItem.Name} в инвентаре меньше, чем вычитаемое количество");
+                _logger.Warn($"Trying to remove more items than in inventory. name={resourceItem.Name}");
             }
             
             _items[resourceItem] -= quantity;
